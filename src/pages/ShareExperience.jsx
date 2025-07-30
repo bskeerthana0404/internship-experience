@@ -1,3 +1,5 @@
+// frontend/components/ShareExperience.jsx
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
@@ -6,7 +8,7 @@ const Page = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(to right, #ff512f, #dd2476);
 `;
 
@@ -24,6 +26,7 @@ const FormBox = styled.div`
 const Title = styled.h2`
   text-align: center;
   color: #dd2476;
+  margin-bottom: 10px;
 `;
 
 const Input = styled.input`
@@ -37,6 +40,7 @@ const TextArea = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 10px;
   height: 100px;
+  resize: none;
 `;
 
 const Select = styled.select`
@@ -60,30 +64,30 @@ const Button = styled.button`
 `;
 
 function ShareExperience() {
-  const [company, setCompany] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [experience, setExperience] = useState("");
   const [rating, setRating] = useState("");
 
   const handleSubmit = async () => {
-    if (!company || !experience || !rating) {
+    if (!companyName || !experience || !rating) {
       alert("Please fill out all fields");
       return;
     }
 
     try {
-      await axios.post("http://localhost:5000/api/experiences", {
-        email: "test@example.com", // Replace with real user session
-        company,
+      await axios.post("http://localhost:5000/api/experience", {
+        companyName,
         experience,
         rating,
       });
+
       alert("Experience shared!");
-      setCompany("");
+      setCompanyName("");
       setExperience("");
       setRating("");
     } catch (err) {
+      console.error("Submission Error:", err.response?.data || err.message);
       alert("Error submitting experience");
-      console.error(err);
     }
   };
 
@@ -94,8 +98,8 @@ function ShareExperience() {
         <Input
           type="text"
           placeholder="Company Name"
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
+          value={companyName}
+          onChange={(e) => setCompanyName(e.target.value)}
         />
         <TextArea
           placeholder="Write your experience..."

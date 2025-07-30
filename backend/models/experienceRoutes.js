@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Experience = require("../models/ExperienceModel");
+const Experience = require('../models/experienceModel');
 
 // POST: Add a new experience
 router.post("/", async (req, res) => {
