@@ -1,17 +1,26 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Experience = require('../models/experienceModel');
+const Experience = require("../models/ExperienceModel");
 
-// POST /api/experience
-router.post('/', async (req, res) => {
+// POST: Add a new experience
+router.post("/", async (req, res) => {
   try {
     const { companyName, experience, rating } = req.body;
     const newExperience = new Experience({ companyName, experience, rating });
     await newExperience.save();
-    res.status(201).json({ message: 'Experience saved!' });
-  } catch (err) {
-    console.error(err);  // ✅ this shows error in terminal
-    res.status(500).json({ error: 'Failed to save experience' });
+    res.status(201).json({ message: "Experience shared successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error saving experience", error });
+  }
+});
+
+// GET: Get all experiences
+router.get("/", async (req, res) => {
+  try {
+    const experiences = await Experience.find();
+    res.json(experiences);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching experiences", error });
   }
 });
 

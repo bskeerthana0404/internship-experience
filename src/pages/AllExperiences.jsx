@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const Page = styled.div`
   display: flex;
@@ -31,28 +32,44 @@ const Emoji = styled.span`
   margin-left: 10px;
 `;
 
-const dummyData = [
-  { text: "I learned a lot about React at my internship.", rating: "Good" },
-  { text: "The internship was okay, not much guidance.", rating: "Okay" },
-  { text: "Bad experience, they made me do unrelated work.", rating: "Bad" },
-];
-
 function AllExperiences() {
+  const [experiences, setExperiences] = useState([]);
+  
   const emojiMap = {
     Good: "😊",
     Okay: "😐",
     Bad: "😞",
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/experience");
+        setExperiences(res.data);
+      } catch (err) {
+        console.error("Error fetching experiences:", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Page>
       <Title>All Student Experiences</Title>
-      {dummyData.map((exp, index) => (
-        <Card key={index}>
-          <p>{exp.text}</p>
-          <p>Rating: {exp.rating} <Emoji>{emojiMap[exp.rating]}</Emoji></p>
-        </Card>
-      ))}
+      {experiences.length === 0 ? (
+        <p>No experiences yet.</p>
+      ) : (
+        experiences.map((exp, index) => (
+          <Card key={index}>
+            <p><strong>Company:</strong> {exp.companyName}</p>
+            <p>{exp.experience}</p>
+            <p>
+              Rating: {exp.rating} <Emoji>{emojiMap[exp.rating]}</Emoji>
+            </p>
+          </Card>
+        ))
+      )}
     </Page>
   );
 }
