@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Page = styled.div`
   display: flex;
@@ -32,27 +33,63 @@ const Emoji = styled.span`
   margin-left: 10px;
 `;
 
+const ButtonContainer = styled.div`
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Button = styled.button`
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #dd2476;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #c21e68;
+  }
+`;
+
 function AllExperiences() {
   const [experiences, setExperiences] = useState([]);
-  
+  const navigate = useNavigate();
+
   const emojiMap = {
     Good: "😊",
     Okay: "😐",
     Bad: "😞",
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/experience");
-        setExperiences(res.data);
-      } catch (err) {
-        console.error("Error fetching experiences:", err);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/experience");
+      setExperiences(res.data);
+    } catch (err) {
+      console.error("Error fetching experiences:", err);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/experience/${id}`);
+      fetchData(); // Refresh the list
+    } catch (err) {
+      console.error("Error deleting experience:", err);
+    }
+  };
+
+  const handleEdit = (experience) => {
+    // Navigate to /share with selected experience as state
+    navigate("/share", { state: { experience } });
+  };
 
   return (
     <Page>
@@ -60,14 +97,21 @@ function AllExperiences() {
       {experiences.length === 0 ? (
         <p>No experiences yet.</p>
       ) : (
-        experiences.map((exp, index) => (
-          <Card key={index}>
+        experiences.map((exp) => (
+          <Card key={exp._id}>
             <p><strong>Company:</strong> {exp.companyName}</p>
-            <p><strong>Domain:</strong> {exp.domain}</p> 
+            <p><strong>Domain:</strong> {exp.domain}</p>
             <p>{exp.experience}</p>
-            <p><strong>
-              Rating: {exp.rating} <Emoji>{emojiMap[exp.rating]}</Emoji></strong>
+            <p>
+              <strong>
+                Rating: {exp.rating} <Emoji>{emojiMap[exp.rating]}</Emoji>
+              </strong>
             </p>
+
+            <ButtonContainer>
+              <Button onClick={() => handleEdit(exp)}>Edit</Button>
+              <Button onClick={() => handleDelete(exp._id)}>Delete</Button>
+            </ButtonContainer>
           </Card>
         ))
       )}
@@ -76,19 +120,3 @@ function AllExperiences() {
 }
 
 export default AllExperiences;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
