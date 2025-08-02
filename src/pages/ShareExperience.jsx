@@ -64,6 +64,7 @@ const Button = styled.button`
 
 function ShareExperience() {
   const [companyName, setCompanyName] = useState("");
+  const[domain,setdomain]=useState("");
   const [experience, setExperience] = useState("");
   const [rating, setRating] = useState("");
 
@@ -76,12 +77,14 @@ function ShareExperience() {
     try {
       await axios.post("http://localhost:5000/api/experience", {
         companyName,
+        domain,
         experience,
         rating,
       });
 
       alert("Experience shared!");
       setCompanyName("");
+      setdomain("");
       setExperience("");
       setRating("");
     } catch (err) {
@@ -100,6 +103,13 @@ function ShareExperience() {
           value={companyName}
           onChange={(e) => setCompanyName(e.target.value)}
         />
+        <Input
+            type="text"
+            placeholder="Domain"
+            value={domain}
+            onChange={(e) => setdomain(e.target.value)}
+            />
+
         <TextArea
           placeholder="Write your experience..."
           value={experience}

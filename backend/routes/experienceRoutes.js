@@ -5,8 +5,8 @@ const Experience = require("../models/ExperienceModel");
 // POST: Add a new experience
 router.post("/", async (req, res) => {
   try {
-    const { companyName, experience, rating } = req.body;
-    const newExperience = new Experience({ companyName, experience, rating });
+    const { companyName, domain,experience, rating } = req.body;
+    const newExperience = new Experience({ companyName, domain,experience, rating });
     await newExperience.save();
     res.status(201).json({ message: "Experience shared successfully" });
   } catch (error) {

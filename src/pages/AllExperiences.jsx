@@ -63,9 +63,10 @@ function AllExperiences() {
         experiences.map((exp, index) => (
           <Card key={index}>
             <p><strong>Company:</strong> {exp.companyName}</p>
+            <p><strong>Domain:</strong> {exp.domain}</p> 
             <p>{exp.experience}</p>
-            <p>
-              Rating: {exp.rating} <Emoji>{emojiMap[exp.rating]}</Emoji>
+            <p><strong>
+              Rating: {exp.rating} <Emoji>{emojiMap[exp.rating]}</Emoji></strong>
             </p>
           </Card>
         ))
@@ -75,3 +76,19 @@ function AllExperiences() {
 }
 
 export default AllExperiences;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
