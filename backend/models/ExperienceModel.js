@@ -1,8 +1,8 @@
-// backend/models/experienceModel.js
 const mongoose = require('mongoose');
 
 const experienceSchema = new mongoose.Schema({
   companyName: { type: String, required: true },
+  location: {type:String,required:true},
   domain:{ type:String,required: true},
   experience: { type: String, required: true },
   rating: { type: String, required: true },

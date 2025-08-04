@@ -314,12 +314,389 @@ export default ShareExperience;*/
 
 
 
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import styled from "styled-components";
+// import { useLocation, useNavigate } from "react-router-dom";
+
+// // Outer wrapper with full-page gradient background
+// const Page = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 100vh;
+//   background: linear-gradient(to right, #ff512f, #dd2476);
+//   font-family: 'Segoe UI', sans-serif;
+// `;
+
+// // Form container with white background
+// const ShareExperienceContainer = styled.div`
+//   background: white;
+//   padding: 40px;
+//   border-radius: 15px;
+//   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+//   width: 400px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 15px;
+// `;
+
+// const Title = styled.h2`
+//   text-align: center;
+//   color: #dd2476;
+//   margin-bottom: 10px;
+// `;
+
+// const Input = styled.input`
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+// `;
+
+// const Textarea = styled.textarea`
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+//   height: 100px;
+//   resize: none;
+// `;
+
+// const Select = styled.select`
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+// `;
+
+// const Button = styled.button`
+//   padding: 10px;
+//   background:  #dd2476;
+//   color: white;
+//   border: none;
+//   border-radius: 10px;
+//   font-weight: bold;
+//   cursor: pointer;
+
+//   &:hover {
+//     background: black;
+//   }
+// `;
+
+// function ShareExperience() {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+//   const editingExperience = location.state?.experience || null;
+
+//   const [companyName, setCompanyName] = useState("");
+//    const [location, setLocation] = useState("");
+//   const [domain, setDomain] = useState("");
+//   const [experience, setExperience] = useState("");
+//   const [rating, setRating] = useState("");
+
+//   useEffect(() => {
+//     if (editingExperience) {
+//       setCompanyName(editingExperience.companyName || "");
+//       setCompanyName(editingExperience.location || "");
+//       setDomain(editingExperience.domain || "");
+//       setExperience(editingExperience.experience || "");
+//       setRating(editingExperience.rating || "");
+//     }
+//   }, [editingExperience]);
+
+//   const handleSubmit = async () => {
+//     if (!companyName || !experience || !rating) {
+//       alert("Please fill out all fields");
+//       return;
+//     }
+
+//     const payload = { companyName, domain, experience, rating };
+
+//     try {
+//       if (editingExperience && editingExperience._id) {
+//         await axios.put(
+//           `http://localhost:5000/api/experience/${editingExperience._id}`,
+//           payload
+//         );
+//         alert("Experience updated successfully!");
+//       } else {
+//         await axios.post("http://localhost:5000/api/experience", payload);
+//         alert("Experience shared successfully!");
+//       }
+
+//       setCompanyName("");
+//       setLocation("");
+//       setDomain("");
+//       setExperience("");
+//       setRating("");
+
+//       navigate("/all");
+//     } catch (err) {
+//       console.error("Error:", err.response?.data || err.message);
+//       alert("An error occurred. Please try again.");
+//     }
+//   };
+
+//   return (
+//     <Page>
+//       <ShareExperienceContainer>
+//         <Title>{editingExperience ? "Edit Experience" : "Share Experience"}</Title>
+//         <Input
+//           type="text"
+//           placeholder="Company Name"
+//           value={companyName}
+//           onChange={(e) => setCompanyName(e.target.value)}
+//         />
+//         <Input
+//           placeholder="Company Location" // ✅ New Field
+//           value={location}
+//           onChange={(e) => setLocation(e.target.value)}
+//           required
+//         />
+//         <Input
+//           type="text"
+//           placeholder="Domain"
+//           value={domain}
+//           onChange={(e) => setDomain(e.target.value)}
+//         />
+//         <Textarea
+//           placeholder="Describe your experience"
+//           value={experience}
+//           onChange={(e) => setExperience(e.target.value)}
+//         />
+//         <Select value={rating} onChange={(e) => setRating(e.target.value)}>
+//           <option value="">Select Rating</option>
+//           <option value="Good">😊 Good</option>
+//           <option value="Okay">😐 Okay</option>
+//           <option value="Bad">😞 Bad</option>
+//         </Select>
+//         <Button onClick={handleSubmit}>
+//           {editingExperience ? "Update Experience" : "Share Experience"}
+//         </Button>
+//       </ShareExperienceContainer>
+//     </Page>
+//   );
+// }
+
+// export default ShareExperience;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import styled from "styled-components";
+// import { useLocation, useNavigate } from "react-router-dom";
+
+// // Full-page gradient background
+// const Page = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 100vh;
+//   background: linear-gradient(to right, #ff512f, #dd2476);
+//   font-family: 'Segoe UI', sans-serif;
+// `;
+
+// // Card-style container
+// const ShareExperienceContainer = styled.div`
+//   background: white;
+//   padding: 40px;
+//   border-radius: 15px;
+//   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+//   width: 400px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 15px;
+// `;
+
+// const Title = styled.h2`
+//   text-align: center;
+//   color: #dd2476;
+//   margin-bottom: 10px;
+// `;
+
+// const Input = styled.input`
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+// `;
+
+// const Textarea = styled.textarea`
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+//   height: 100px;
+//   resize: none;
+// `;
+
+// const Select = styled.select`
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   border-radius: 10px;
+// `;
+
+// const Button = styled.button`
+//   padding: 10px;
+//   background: #dd2476;
+//   color: white;
+//   border: none;
+//   border-radius: 10px;
+//   font-weight: bold;
+//   cursor: pointer;
+
+//   &:hover {
+//     background: black;
+//   }
+// `;
+
+// function ShareExperience() {
+//   const locationData = useLocation();
+//   const navigate = useNavigate();
+//   const editingExperience = locationData.state?.experience || null;
+
+//   const [companyName, setCompanyName] = useState("");
+//   const [location, setLocation] = useState(""); // New field
+//   const [domain, setDomain] = useState("");
+//   const [experience, setExperience] = useState("");
+//   const [rating, setRating] = useState("");
+
+//   useEffect(() => {
+//     if (editingExperience) {
+//       setCompanyName(editingExperience.companyName || "");
+//       setLocation(editingExperience.location || "");
+//       setDomain(editingExperience.domain || "");
+//       setExperience(editingExperience.experience || "");
+//       setRating(editingExperience.rating || "");
+//     }
+//   }, [editingExperience]);
+
+//   const handleSubmit = async () => {
+//     if (!companyName || !location || !domain || !experience || !rating) {
+//       alert("Please fill out all fields");
+//       return;
+//     }
+
+//     const payload = { companyName, location, domain, experience, rating };
+
+//     try {
+//       if (editingExperience && editingExperience._id) {
+//         await axios.put(`http://localhost:5000/api/experience/${editingExperience._id}`, payload);
+//         alert("Experience updated successfully!");
+//       } else {
+//         await axios.post("http://localhost:5000/api/experience", payload);
+//         alert("Experience shared successfully!");
+//       }
+
+//       setCompanyName("");
+//       setLocation("");
+//       setDomain("");
+//       setExperience("");
+//       setRating("");
+
+//       navigate("/all");
+//     } catch (err) {
+//       console.error("Error:", err.response?.data || err.message);
+//       alert("An error occurred. Please try again.");
+//     }
+//   };
+
+//   return (
+//     <Page>
+//       <ShareExperienceContainer>
+//         <Title>{editingExperience ? "Edit Experience" : "Share Experience"}</Title>
+//         <Input
+//           type="text"
+//           placeholder="Company Name"
+//           value={companyName}
+//           onChange={(e) => setCompanyName(e.target.value)}
+//         />
+//         <Input
+//           type="text"
+//           placeholder="Company Location"
+//           value={location}
+//           onChange={(e) => setLocation(e.target.value)}
+//         />
+//         <Input
+//           type="text"
+//           placeholder="Domain"
+//           value={domain}
+//           onChange={(e) => setDomain(e.target.value)}
+//         />
+//         <Textarea
+//           placeholder="Describe your experience"
+//           value={experience}
+//           onChange={(e) => setExperience(e.target.value)}
+//         />
+//         <Select value={rating} onChange={(e) => setRating(e.target.value)}>
+//           <option value="">Select Rating</option>
+//           <option value="Good">😊 Good</option>
+//           <option value="Okay">😐 Okay</option>
+//           <option value="Bad">😞 Bad</option>
+//         </Select>
+//         <Button onClick={handleSubmit}>
+//           {editingExperience ? "Update Experience" : "Share Experience"}
+//         </Button>
+//       </ShareExperienceContainer>
+//     </Page>
+//   );
+// }
+
+// export default ShareExperience;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// Outer wrapper with full-page gradient background
+// Full-page gradient background
 const Page = styled.div`
   display: flex;
   justify-content: center;
@@ -328,8 +705,32 @@ const Page = styled.div`
   background: linear-gradient(to right, #ff512f, #dd2476);
   font-family: 'Segoe UI', sans-serif;
 `;
+const ExperienceContent = styled.div`
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+`;
+const ExperienceText = styled.textarea`
+  width: 100%;
+  height: 150px;
+  resize: vertical;
+  overflow-y: auto;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+`;
 
-// Form container with white background
+
+
+// Card-style container
 const ShareExperienceContainer = styled.div`
   background: white;
   padding: 40px;
@@ -357,8 +758,11 @@ const Textarea = styled.textarea`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  height: 100px;
-  resize: none;
+  height: 120px;
+  resize: vertical;
+  overflow-y: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 `;
 
 const Select = styled.select`
@@ -369,7 +773,7 @@ const Select = styled.select`
 
 const Button = styled.button`
   padding: 10px;
-  background:  #dd2476;
+  background: #dd2476;
   color: white;
   border: none;
   border-radius: 10px;
@@ -382,11 +786,12 @@ const Button = styled.button`
 `;
 
 function ShareExperience() {
-  const location = useLocation();
+  const locationData = useLocation();
   const navigate = useNavigate();
-  const editingExperience = location.state?.experience || null;
+  const editingExperience = locationData.state?.experience || null;
 
   const [companyName, setCompanyName] = useState("");
+  const [location, setLocation] = useState("");
   const [domain, setDomain] = useState("");
   const [experience, setExperience] = useState("");
   const [rating, setRating] = useState("");
@@ -394,6 +799,7 @@ function ShareExperience() {
   useEffect(() => {
     if (editingExperience) {
       setCompanyName(editingExperience.companyName || "");
+      setLocation(editingExperience.location || "");
       setDomain(editingExperience.domain || "");
       setExperience(editingExperience.experience || "");
       setRating(editingExperience.rating || "");
@@ -401,19 +807,16 @@ function ShareExperience() {
   }, [editingExperience]);
 
   const handleSubmit = async () => {
-    if (!companyName || !experience || !rating) {
+    if (!companyName || !location || !domain || !experience || !rating) {
       alert("Please fill out all fields");
       return;
     }
 
-    const payload = { companyName, domain, experience, rating };
+    const payload = { companyName, location, domain, experience, rating };
 
     try {
       if (editingExperience && editingExperience._id) {
-        await axios.put(
-          `http://localhost:5000/api/experience/${editingExperience._id}`,
-          payload
-        );
+        await axios.put(`http://localhost:5000/api/experience/${editingExperience._id}`, payload);
         alert("Experience updated successfully!");
       } else {
         await axios.post("http://localhost:5000/api/experience", payload);
@@ -421,6 +824,7 @@ function ShareExperience() {
       }
 
       setCompanyName("");
+      setLocation("");
       setDomain("");
       setExperience("");
       setRating("");
@@ -441,6 +845,12 @@ function ShareExperience() {
           placeholder="Company Name"
           value={companyName}
           onChange={(e) => setCompanyName(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Company Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
         />
         <Input
           type="text"
